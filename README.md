@@ -176,32 +176,6 @@ Edit `visuall_odometry.py` to customize:
   - VO provides high-frequency relative motion estimates
   - EKF optimally weights both sources based on noise characteristics
 
-- **Robustness**: 
-  - Handles GPS dropouts (every 50 frames)
-  - Recovers from VO failures with GPS correction
-  - Smooth trajectory filtering with Kalman prediction
-
-## Data Processing Flow
-
-```
-KITTI Raw Data
-    ├─→ Load OXTS (GPS/IMU) ──→ Convert to local coordinates
-    ├─→ Load Stereo Images ────→ ORB Feature Detection
-    ├─→ Load Calibration ──────→ Camera internals & baseline
-    │
-    └─→ Visual Odometry
-        ├─ Compute stereo disparity
-        ├─ Triangulate 3D points
-        ├─ Match frame-to-frame features
-        └─ Estimate motion (R, t)
-    
-    └─→ Extended Kalman Filter
-        ├─ Predict: IMU acceleration & gyro
-        ├─ Update: GPS position
-        ├─ Update: VO pose estimates
-        └─ Fused state (x, y, yaw, vx, vy, ω)
-
-Output: Trajectories & Error Metrics
 ```
 
 ## Visualization Outputs
@@ -215,40 +189,4 @@ Output: Trajectories & Error Metrics
    - Localization error over time
    - Shows how fusion reduces drift
 
-## Future Improvements
 
-- [ ] Real-time processing optimization
-- [ ] Loop closure detection
-- [ ] Place recognition using image descriptors
-- [ ] Multi-hypothesis tracking
-- [ ] 3D mapping from LiDAR/stereo
-- [ ] Deep learning-based feature extraction
-- [ ] Support for longer sequences
-- [ ] Uncertainty quantification
-
-## Known Limitations
-
-- Processes only 100 frames by default (edit for longer sequences)
-- Assumes constant velocity model between IMU impulses
-- VO degradation in low-texture or repetitive environments
-- No loop closure or global optimization
-- Single-thread processing (not real-time)
-
-## References
-
-- KITTI Dataset: [geom.io/datasets/kitti](http://www.cvlibs.net/datasets/kitti/)
-- OpenCV Stereo Matching: [docs.opencv.org](https://docs.opencv.org)
-- EKF for Navigation: Durrant-Whyte & Bailey (2006)
-
-## License
-
-This project uses KITTI dataset. See KITTI terms for dataset usage restrictions.
-
-## Contact & Contributing
-
-For questions or improvements, please refer to the code documentation and inline comments.
-
----
-
-**Last Updated**: February 2026
-**Status**: Active Development
