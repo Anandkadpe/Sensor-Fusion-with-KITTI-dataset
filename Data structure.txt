@@ -1,0 +1,10 @@
+2011_09_26/
+├── 2011_09_26_drive_0001_sync/
+│   ├── oxts/
+│   │   └── data/
+│   │       ├── 0000000000.txt  # GPS/IMU measurements
+│   │       ├── 0000000001.txt
+│   ├── image_02/data/          # Left camera images
+│   ├── velodyne_points/data/   # LiDAR scans
+│   └── oxts/
+│       └── dataformat.txt      # Explains the data format
